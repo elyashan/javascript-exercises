@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My shopping list</h1>
+
+    <form>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item" />
+      <button>Add item</button>
+    </form>
+
+    <ul></ul>
+
+    <script>
+      const ulElement = document.querySelector("ul");
+      const inputElement = document.querySelector("input");
+      const btnElement = document.querySelector("button");
+      let currentValue = "";
+      function buttonClicked(e) {
+        e.preventDefault();
+        currentValue = inputElement.value;
+        inputElement.value = "";
+        const liElement = document.createElement("li");
+        const spanElement = document.createElement("span");
+        const delButtonElement = document.createElement("button");
+        liElement.appendChild(spanElement);
+        liElement.appendChild(delButtonElement);
+        spanElement.textContent = currentValue;
+        delButtonElement.textContent = "Delete";
+
+        ulElement.appendChild(liElement);
+        delButtonElement.addEventListener("click", (e) => {
+          e.target.parentElement.remove();
+        });
+        inputElement.focus();
+      }
+      btnElement.addEventListener("click", buttonClicked);
+    </script>
+  </body>
+</html>
